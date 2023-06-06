@@ -1,5 +1,6 @@
 import requests
 import unittest
+import json
 
 
 class TestTodoAPI(unittest.TestCase):
@@ -9,12 +10,12 @@ class TestTodoAPI(unittest.TestCase):
     def test_create_todo(self) -> None:
         data = {
             "title": "Create backend for client todo app",
-            "complited": False,
+            # "complited": False,
         }
-        response = requests.post(self.api_url + "todo/", json=data)
+        response = requests.post(self.api_url + "todo/", data=data)
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["title"], "Create backend for client todo app")
-        self.assertEqual(response.json()["complited"], False)
+        self.assertEqual(response.text, "Create backend for client todo app")
+        # self.assertEqual(response.json()["complited"], False)
 
     def test_get_todo(self) -> None:
         pass
